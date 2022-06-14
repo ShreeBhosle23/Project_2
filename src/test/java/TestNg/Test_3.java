@@ -11,6 +11,7 @@ public class Test_3 {
 	@Test(groups= {"regression"})
 	public void m2() {
 		System.out.println("m2");
+		System.out.println("Changes");
 	}
 	@Test(groups= {"sanity"})
 	public void m3() {
