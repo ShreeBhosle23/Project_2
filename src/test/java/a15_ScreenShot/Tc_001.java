@@ -1,0 +1,44 @@
+package a15_ScreenShot;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.io.FileHandler;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Tc_001 {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		
+		//we are casting the driver into WebDriver interface
+		
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver=new ChromeDriver();
+		
+		driver.get("https://www.demo.guru99.com/test/drag_drop.html");
+		driver.manage().window().maximize();
+		Thread.sleep(2000);
+		
+		WebElement src = driver.findElement(By.xpath("(//a[@class='button button-orange'])[5]"));
+		WebElement destn = driver.findElement(By.xpath("(//li[@class='placeholder'])[1]"));
+		
+		Actions act=new Actions(driver);
+		
+		act.dragAndDrop(src, destn).build().perform(); 
+		
+		TakesScreenshot ts=(TakesScreenshot)driver;
+		File sr=ts.getScreenshotAs(OutputType.FILE);
+		File dsn=new File("C:\\Users\\Lenovo\\eclipse-workspace\\Project_2\\src\\test\\java\\test.png");
+		FileHandler.copy(sr, dsn);
+		
+	}
+
+}
